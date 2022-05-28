@@ -1,0 +1,213 @@
+:root {
+  --red-color-gradient: linear-gradient(
+    90deg,
+    hsl(7, 89%, 46%) 15%,
+    hsl(11, 93%, 68%) 100%
+  );
+  --orange-color-gradient: linear-gradient(
+    90deg,
+    hsl(22, 89%, 46%) 15%,
+    hsl(54, 90%, 45%) 100%
+  );
+  --yellow-color-gradient: linear-gradient(
+    90deg,
+    hsl(54, 89%, 46%) 15%,
+    hsl(92, 90%, 45%) 100%
+  );
+  --green-color-gradient: linear-gradient(
+    90deg,
+    hsl(92, 89%, 46%) 15%,
+    hsl(92, 90%, 68%) 100%
+  );
+  --text-color: #ffffff;
+  --background-color: hsl(0, 0%, 11%);
+  --foreground-color: hsl(0, 0%, 9%);
+
+  --font-family: "Rubik", sans-serif;
+
+  --biggest-font-size: 2.5rem;
+  --normal-font-size: 0.9375rem;
+  --smaller-font-size: 0.75rem;
+}
+
+@media screen and (min-width: 968px) {
+  :root {
+    --biggest-font-size: 2.75rem;
+    --normal-font-size: 1rem;
+    --smaller-font-size: 0.8125rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--normal-font-size);
+}
+
+.battery {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0 1.5rem;
+}
+
+.battery__card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  background-color: var(--foreground-color);
+  border-radius: 1.5rem;
+  height: 240px;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  position: relative;
+}
+
+.battery__text {
+  margin-bottom: 0.5rem;
+}
+
+.battery__percentage {
+  font-size: var(--biggest-font-size);
+}
+
+.battery__status {
+  position: absolute;
+  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: var(--smaller-font-size);
+}
+
+.battery__status i {
+  font-size: 1.25rem;
+}
+
+.battery__pill {
+  position: relative;
+  height: 180px;
+  width: 75px;
+  background-color: var(--foreground-color);
+  border-radius: 3rem;
+  box-shadow: inset 20px 0 48px hsl(0, 0%, 16%),
+    inset -4px 12px 48px hsl(0, 0%, 56%);
+  justify-self: flex-end;
+}
+
+.battery__level {
+  position: absolute;
+  inset: 2px;
+  border-radius: 3rem;
+  overflow: hidden;
+}
+
+.battery__liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: var(--red-color-gradient);
+  box-shadow: inset -10px 0 12px hsla(0, 0%, 0%, 0.1),
+    inset 12px 0 12px hsla(0, 0%, 0%, 0.15);
+  transition: 300ms;
+}
+
+.battery__liquid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  height: 8px;
+  background: var(--red-color-gradient);
+  border-radius: 50%;
+  box-shadow: inset 0 -3px 6px hsla(0, 0%, 0%, 0.2);
+  margin: 0 auto;
+}
+
+.green-color {
+  background: var(--green-color-gradient);
+}
+
+.animated-green {
+  background: var(--green-color-gradient);
+  animation: animate-charging-battery 1200ms infinite alternate;
+}
+
+.animated-red {
+  background: var(--red-color-gradient);
+  animation: animate-low-battery 1200ms infinite alternate;
+}
+
+.animated-green,
+.animated-red,
+.green-color {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes animate-charging-battery {
+  0% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 0 6px hsl(92, 90%, 68%);
+  }
+}
+
+@keyframes animate-low-battery {
+  0% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 0 8px hsl(7, 89%, 46%);
+  }
+}
+
+.red-color-gradient,
+.red-color-gradient::after {
+  background: var(--red-color-gradient);
+}
+
+.orange-color-gradient,
+.orange-color-gradient::after {
+  background: var(--orange-color-gradient);
+}
+
+.yellow-color-gradient,
+.yellow-color-gradient::after {
+  background: var(--yellow-color-gradient);
+}
+
+.green-color-gradient,
+.green-color-gradient::after {
+  background: var(--green-color-gradient);
+}
+
+@media screen and (max-width: 320px) {
+  .battery__card {
+    zoom: 0.8;
+  }
+}
+
+@media screen and (min-width: 430px) {
+  .battery__card {
+    width: 20rem;
+  }
+}
+
+@media screen and (min-width: 1024) {
+  .battery__card {
+    zoom: 1.5;
+  }
+}
